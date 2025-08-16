@@ -1,30 +1,24 @@
-📝 Simple To-Do List App (Python CLI)
+✅ To-Do List CLI App (with JSON Persistence)
 
-This is a simple command-line To-Do list app built using Python. It allows users to manage daily tasks using basic CRUD operations.
-
----
-
-💡 Features
-
-- ✅ Add a new task
-- 📋 View all tasks
-- ✏️ Update a task by ID
-- 🗑️ Delete a task by ID
-- 👋 Exit the app anytime
+This is a simple command-line To-Do List application written in Python. It allows users to manage tasks with functionalities to add, view, update, and delete tasks. All tasks are stored in a `tasks.json` file for persistence.
 
 ---
 
-📦 How it Works
+📦 Features
 
-The app stores all tasks in a Python list as dictionaries, where each task contains:
-
-- id: Unique ID (auto-incremented)
-- title: Task name
-- description: Task details
+- ➕ Add new tasks with title and description
+- 📋 View all tasks with unique IDs
+- 📝 Update existing tasks by ID
+- 🗑️ Delete tasks by ID
+- 💾 Save tasks automatically in `tasks.json`
 
 ---
 
-🖥️ Run the App
+🚀 How to Run
 
-bash
-python Simple To-Do List App.py
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ahtisham06/To-Do List CLI App.git
+   cd todo-json-app
+
+
