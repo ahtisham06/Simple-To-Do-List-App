@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "title": "Buy groceries",
+        "description": "Buy milk, eggs, and bread from the store."
+    },
+    {
+        "id": 2,
+        "title": "Clean the house",
+        "description": "Sweep and mop the floors, and dust the furniture."
+    }
+]
