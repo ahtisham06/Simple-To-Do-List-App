@@ -1,5 +1,29 @@
+import json
+import os
 
-To_Do_List = []
+FILE_NAME = "todo.json"
+
+# Load data from JSON file
+def load_tasks():
+    if os.path.exists(FILE_NAME):
+        try:
+            with open(FILE_NAME, 'r') as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            print("⚠️ Error: JSON file is corrupted or empty.")
+            return [] 
+    return []
+
+# Save data to JSON file
+def save_tasks():
+    try:
+        with open(FILE_NAME, 'w') as file:
+            json.dump(To_Do_List, file, indent=4) 
+    except Exception as e:
+        print(f"⚠️ Error saving tasks: {e}")
+
+# Initialize To_Do_List from file
+To_Do_List = load_tasks()
 
 def show_menu():
     print("\n--- TO-DO APP ---")
@@ -12,11 +36,14 @@ def show_menu():
 def add_task():
     title = input("Enter task title: ")
     description = input("Enter task description: ")
+    new_id = To_Do_List[-1]['id'] + 1 if To_Do_List else 1
     task = {
-         "id": len(To_Do_List) + 1,
+        "id": new_id,
         "title": title,
-        "description": description}
+        "description": description
+    }
     To_Do_List.append(task)
+    save_tasks()
     print("✅ Task added successfully!")
 
 def view_tasks():
@@ -29,27 +56,35 @@ def view_tasks():
         print(f"📝 Description: {task['description']}")
 
 def update_task():
-    task_id = int(input("Enter task ID to update: "))
-    for task in To_Do_List:
-        if task['id'] == task_id:
-            new_title = input("Enter new title: ")
-            new_description = input("Enter new description: ")
-            task['title'] = new_title
-            task['description'] = new_description
-            print("✏️ Task updated successfully!")
-            return
-    print("❌ Task not found!")  
-
+    try:
+        task_id = int(input("Enter task ID to update: "))
+        for task in To_Do_List:
+            if task['id'] == task_id:
+                new_title = input("Enter new title: ")
+                new_description = input("Enter new description: ")
+                task['title'] = new_title
+                task['description'] = new_description
+                save_tasks()
+                print("✏️ Task updated successfully!")
+                return
+        print("❌ Task not found!")
+    except ValueError:
+        print("⚠️ Please enter a valid number.")
 
 def delete_task():
-    task_id = int(input("Enter task ID to delete: "))
-    for task in To_Do_List:
-        if task['id'] == task_id:
-            To_Do_List.remove(task)
-            print("🗑️ Task deleted successfully!")
-            return
-    print("❌ Task not found!")
+    try:
+        task_id = int(input("Enter task ID to delete: "))
+        for task in To_Do_List:
+            if task['id'] == task_id:
+                To_Do_List.remove(task)
+                save_tasks()
+                print("🗑️ Task deleted successfully!")
+                return
+        print("❌ Task not found!")
+    except ValueError:
+        print("⚠️ Please enter a valid number.")
 
+# Main Loop
 while True:
     show_menu()
     choice = input("Enter your choice (1-5): ")
